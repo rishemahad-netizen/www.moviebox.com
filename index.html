@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mwilix - Watch Movies and TV Shows</title>
+<link rel="icon" type="image/jpeg" href="logo.jpg">
+<link rel="apple-touch-icon" href="logo.jpg">
+<meta name="theme-color" content="#11161f">
+<style>
+:root{--bg:#11161f;--bg2:#1a212d;--card:#202838;--text:#fff;--mute:rgba(255,255,255,.62);--a1:#1cb7ff;--a2:#2ff58b;--grad:linear-gradient(90deg,var(--a1),var(--a2));box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef2f7;--bg2:#fff;--card:#dfe6f0;--text:#11161f;--mute:rgba(17,22,31,.62)}}
+:root[data-theme="dark"]{--bg:#11161f}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.4}
+a{color:inherit;text-decoration:none}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg2);display:flex;align-items:center;gap:16px;padding:10px 20px;flex-wrap:wrap;border-bottom:1px solid rgba(127,127,127,.2)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
+.logo img{width:40px;height:40px;border-radius:10px}
+.menu{display:flex;gap:18px;font-size:14px;color:var(--mute);margin-left:8px;flex-wrap:wrap}
+.menu a:hover,.menu a.on{color:var(--text)}
+.sp{flex:1}
+.search{background:var(--card);border:0;border-radius:20px;padding:8px 14px;color:var(--text);width:200px;max-width:100%}
+.btn{background:var(--grad);color:#08121c;font-weight:700;padding:8px 16px;border-radius:20px;font-size:14px}
+.top{display:flex;gap:16px;font-size:13px;color:var(--mute)}
+.hero{background-size:cover;background-position:center 20%;margin:20px;border-radius:18px;min-height:260px;padding:32px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;background:linear-gradient(180deg,rgba(17,22,31,.1) 0%,rgba(17,22,31,.9) 100%)}
+.hero h1{font-size:clamp(26px,5vw,44px)}
+.hero p{color:var(--mute)}
+.hero .btn{align-self:flex-start;margin-top:6px}
+section{padding:6px 20px 10px}
+.rh{display:flex;justify-content:space-between;align-items:center;margin:14px 0 10px}
+.rh h2{font-size:20px;border-left:4px solid var(--a1);padding-left:10px}
+.rh a{font-size:13px;color:var(--a1)}
+.row{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scrollbar-width:thin}
+.card{flex:0 0 150px;display:block}
+.poster{position:relative;aspect-ratio:2/3;border-radius:12px;overflow:hidden;background-size:cover;background-position:center;background-color:var(--card);box-shadow:0 4px 14px rgba(0,0,0,.35);transition:transform .2s}
+.card:hover .poster{transform:translateY(-4px)}
+.poster svg{position:absolute;top:10px;right:10px;width:26px;height:26px;opacity:.9}
+.poster span{position:relative;text-shadow:0 1px 6px rgba(0,0,0,.7);color:#fff}
+.tag{position:absolute;top:8px;left:8px;background:var(--grad);color:#08121c;font-size:10px;padding:2px 7px;border-radius:8px}
+.meta b{display:block;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:12px;color:var(--mute);margin-top:6px}
+.ads{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.ad{background:var(--card);border-radius:14px;overflow:hidden;display:block}
+.ad .img{height:120px;background-size:cover;background-position:center 25%}
+.ad div.t{padding:10px 12px;font-size:13px;color:var(--mute)}
+.ad b{display:block;color:var(--text);font-size:15px}
+footer{margin-top:30px;padding:24px 20px;background:var(--bg2);font-size:13px;color:var(--mute);display:grid;gap:8px}
+footer nav{display:flex;gap:16px;flex-wrap:wrap}
+.ov{position:fixed;inset:0;z-index:20;background:rgba(5,8,13,.78);display:none;align-items:center;justify-content:center;padding:20px}
+.ov.on{display:flex}
+.md{background:var(--bg2);border-radius:18px;max-width:640px;width:100%;max-height:90vh;overflow:auto;display:flex;gap:20px;padding:20px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.md img{width:220px;max-width:40%;border-radius:12px;align-self:flex-start;object-fit:cover}
+.md .in{display:flex;flex-direction:column;gap:10px;min-width:0}
+.md h3{font-size:22px}
+.md p{color:var(--mute);font-size:14px}
+.md .acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.md .btn2{border:1px solid var(--a1);color:var(--a1);padding:8px 16px;border-radius:20px;font-size:14px;font-weight:700}
+.x{position:absolute;top:10px;right:12px;background:var(--card);border:0;color:var(--text);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer}
+@media(max-width:520px){.md{flex-direction:column}.md img{width:60%;max-width:none}}
+.card{cursor:pointer}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#"><img src="logo.jpg" alt="Mwilix logo">Mwilix</a>
+  <nav class="menu"><a class="on" href="#">Home</a><a href="#series">TV Show</a><a href="#movies">Movie</a><a href="#anime">Animation</a><a href="#ranking">Most Watched</a></nav>
+  <div class="sp"></div>
+  <div class="top"><a href="#">Customer Care</a><a href="#">Support Us</a><a href="#">How We Work</a></div>
+  <input class="search" type="search" placeholder="Search movies, series...">
+  <a class="btn" href="#">Download App</a>
+</header>
+
+<div class="hero" id="hero">
+  <h1>Enjoy unlimited movies and shows</h1>
+  <p>Download your favorite content to watch offline. Simple interface &amp; smooth performance.</p>
+  <a class="btn" href="#">Get the App</a>
+</div>
+
+<section id="series"><div class="rh"><h2>Trending Now</h2><a href="#">More ›</a></div><div class="row" data-row="r1"></div></section>
+<section id="movies"><div class="rh"><h2>Popular Movie</h2><a href="#">More ›</a></div><div class="row" data-row="r2"></div></section>
+<section><div class="rh"><h2>More to Discover</h2></div><div class="ads" id="ads"></div></section>
+<section id="anime"><div class="rh"><h2>Animation &amp; Family</h2><a href="#">More ›</a></div><div class="row" data-row="r3"></div></section>
+<section id="ranking"><div class="rh"><h2>Action &amp; Sci-Fi</h2><a href="#">More ›</a></div><div class="row" data-row="r4"></div></section>
+<section><div class="rh"><h2>Most Watched</h2><a href="#">More ›</a></div><div class="row" data-row="r5"></div></section>
+
+<footer>
+  <nav><a href="#">Customer Care</a><a href="#">Support Us</a><a href="#">How We Work</a><a href="#">Privacy Policy</a><a href="#">User Agreement</a></nav>
+  <div>Disclaimer: All videos and pictures on this site come from the Internet and belong to their original creators.</div>
+</footer>
+
+<div class="ov" id="ov" aria-hidden="true"><div class="md" role="dialog" aria-modal="true" aria-labelledby="mt"><button class="x" id="mx" aria-label="Close">&times;</button><img id="mi" alt=""><div class="in"><h3 id="mt"></h3><div class="meta" id="mm"></div><p>Movie description goes here. Replace this text with your own synopsis.</p><div class="acts"><a class="btn" id="md" href="https://example.com/" target="_blank" rel="noopener">Download</a><a class="btn2" id="mw" href="https://example.com/" target="_blank" rel="noopener">Watch Trailer</a></div></div></div></div><script>
+var IMG={"avatar-fire-and-ash": "avatar-fire-and-ash.jpg", "bumblebee": "bumblebee.jpg", "damsel": "damsel.jpg", "encanto": "encanto.jpg", "ghost-in-the-shell": "ghost-in-the-shell.jpg", "lucy": "lucy.jpg", "venom": "venom.jpg", "predator-badlands": "predator-badlands.jpg", "boss-baby": "boss-baby.jpg", "turning-red": "turning-red.jpg", "alita": "alita.jpg", "tron-legacy": "tron-legacy.jpg", "wakanda-forever": "wakanda-forever.jpg"};
+var M=[["avatar-fire-and-ash", "Avatar: Fire and Ash", "2025", "Sci-Fi, Adventure"], ["bumblebee", "Bumblebee", "2018", "Action, Sci-Fi"], ["damsel", "Damsel", "2024", "Fantasy, Adventure"], ["encanto", "Encanto", "2021", "Animation, Family"], ["ghost-in-the-shell", "Ghost in the Shell", "2017", "Sci-Fi, Action"], ["lucy", "Lucy", "2014", "Action, Sci-Fi"], ["venom", "Venom", "2018", "Action, Sci-Fi"], ["predator-badlands", "Predator: Badlands", "2025", "Action, Sci-Fi"], ["boss-baby", "The Boss Baby: Family Business", "2021", "Animation, Comedy"], ["turning-red", "Turning Red", "2022", "Animation, Family"], ["alita", "Alita: Battle Angel", "2019", "Action, Sci-Fi"], ["tron-legacy", "Tron: Legacy", "2010", "Sci-Fi, Action"], ["wakanda-forever", "Black Panther: Wakanda Forever", "2022", "Action, Adventure"]];
+var R={r1:[10,12,6,0,7,11,4,5],r2:[2,1,12,9,8,3,10,0],r3:[3,9,8,2,1,7,6,5],r4:[6,7,5,11,4,10,1,0],r5:[12,0,10,11,6,2,8,3]};
+var ADS=[["SecretMuse","Create AI videos and images.",0],["iFunny","Fresh jokes and funny stories.",6],["WherePDF","Fast online PDF tools.",11],["DoResumes","Build a professional resume.",12],["VSKIT Online","Watch addictive short dramas.",3],["ImageResize","Resize and optimize images.",7]];
+var PLAY='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="rgba(255,255,255,.9)"/><path d="M10 7.5v9l6.5-4.5z" fill="#12806a"/></svg>';
+function u(i){return "url('"+IMG[M[i][0]]+"')"}
+document.getElementById("hero").style.backgroundImage="linear-gradient(180deg,rgba(17,22,31,.1),rgba(17,22,31,.9)),"+u(0);
+document.querySelectorAll("[data-row]").forEach(function(r){
+  R[r.dataset.row].forEach(function(i,n){var m=M[i];
+    var a=document.createElement("a");a.className="card";a.href="#";a.onclick=function(e){e.preventDefault();openM(i)};
+    a.innerHTML='<div class="poster" style="background-image:'+u(i)+'">'+(n%3==0?'<div class="tag">Limited Free</div>':'')+PLAY+'</div><div class="meta"><b>'+m[1]+'</b>'+m[2]+' · '+m[3]+'</div>';
+    r.appendChild(a);});
+});
+var ad=document.getElementById("ads");
+ADS.forEach(function(x){var a=document.createElement("a");a.className="ad";a.href="https://example.com/";a.target="_blank";a.rel="noopener";
+  a.innerHTML='<div class="img" style="background-image:'+u(x[2])+'"></div><div class="t"><b>'+x[0]+' \u2197</b>'+x[1]+'</div>';ad.appendChild(a);});
+var last;
+function openM(i){var m=M[i];last=document.activeElement;document.getElementById("mi").src=IMG[m[0]];document.getElementById("mi").alt=m[1]+" poster";document.getElementById("mt").textContent=m[1];document.getElementById("mm").textContent=m[2]+" · "+m[3];var o=document.getElementById("ov");o.classList.add("on");o.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";document.getElementById("mx").focus()}
+function closeM(){var o=document.getElementById("ov");o.classList.remove("on");o.setAttribute("aria-hidden","true");document.body.style.overflow="";if(last)last.focus()}
+document.getElementById("mx").onclick=closeM;
+document.getElementById("ov").onclick=function(e){if(e.target===this)closeM()};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeM()});
+</script>
+</body>
+</html>
